@@ -1,1 +1,1 @@
-# Sudoku
+# Proyecto Sudoku desarollado con HTML5,CSS3 y JavaScript.
