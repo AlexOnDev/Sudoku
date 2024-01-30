@@ -96,6 +96,7 @@ function selectTile(){
 }
 function darkMode() {
     document.body.classList.toggle("dark-mode");
+    
     var elementosConClase = Array.from(document.getElementsByClassName("tile-start"));
     elementosConClase.forEach(function(elemento) {
         elemento.classList.toggle("dark-modeTile");
