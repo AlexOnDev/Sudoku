@@ -64,3 +64,23 @@ hr{
 .vertical-line{
     border-right: 1px solid black;
 }
+#inicio{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+button{
+   position: absolute;
+   left: 90%;
+   padding: 10px;
+   width: 80px;
+}
+.dark-mode {
+    background-color: rgb(24, 23, 23);
+    color: white;
+}
+.dark-modeTile{
+    background-color:#3a3942;
+    
+}  

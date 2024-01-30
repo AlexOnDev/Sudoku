@@ -63,6 +63,10 @@ function setGame(){
             document.getElementById("board").append(tile);
         }
     }
+    let buttonDm=document.getElementById("darkmode");
+
+    buttonDm.addEventListener("click", darkMode);
+
 }
 function selectNumber(){
     if(numSelected != null){
@@ -90,3 +94,11 @@ function selectTile(){
         }
     }
 }
+function darkMode() {
+    document.body.classList.toggle("dark-mode");
+    var elementosConClase = Array.from(document.getElementsByClassName("tile-start"));
+    elementosConClase.forEach(function(elemento) {
+        elemento.classList.toggle("dark-modeTile");
+    });
+
+ }
