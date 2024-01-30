@@ -69,14 +69,21 @@ function setGame(){
 
 }
 function selectNumber(){
-    if(numSelected != null){
-        numSelected.classList.remove("numberSelected")
+    if(numSelected==this){
+        numSelected.classList.toggle("numberSelected");
     }
-    numSelected=this;
-    numSelected.classList.add("numberSelected");
+    else {
+        if(numSelected!=null) 
+            numSelected.classList.remove("numberSelected");
+           
+        
+        numSelected=this;
+        numSelected.classList.add("numberSelected");
+    }
+    
 }
 function selectTile(){
-    if(numSelected){
+    if(checkNumberSelected()){
         if(this.innerText != "") //NO SOBRESCRIBIR
         return;
 
@@ -96,10 +103,15 @@ function selectTile(){
 }
 function darkMode() {
     document.body.classList.toggle("dark-mode");
-    
+
     var elementosConClase = Array.from(document.getElementsByClassName("tile-start"));
     elementosConClase.forEach(function(elemento) {
         elemento.classList.toggle("dark-modeTile");
     });
 
+ }
+ function checkNumberSelected(){
+    var numbersSelected = document.getElementsByClassName("numberSelected");
+    if(numbersSelected.length >0) return true;
+    return false;
  }
