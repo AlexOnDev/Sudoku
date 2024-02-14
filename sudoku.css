@@ -75,12 +75,27 @@ button{
    left: 90%;
    padding: 10px;
    width: 80px;
+   border: 2px solid black;
+   background-color: coral;
+   border-radius: 10px;
 }
-.dark-mode {
+.dark-mode{
     background-color: rgb(24, 23, 23);
     color: white;
 }
-.dark-modeTile{
+.dark-modeTile-start{
     background-color:#3a3942;
     
-}  
+}
+.darkTile-border{
+    border: solid 1px rgb(85, 85, 85);
+}
+.dark-mode-border-number{
+    border: solid 1px white;
+}
+.dark-horizontal-line{
+    border-bottom: 1px solid white;
+}
+.dark-vertical-line{
+    border-right: 1px solid white;
+}

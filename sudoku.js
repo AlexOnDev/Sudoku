@@ -104,11 +104,32 @@ function selectTile(){
 function darkMode() {
     document.body.classList.toggle("dark-mode");
 
-    var elementosConClase = Array.from(document.getElementsByClassName("tile-start"));
+
+    var elementosConClase = Array.from(document.getElementsByClassName("tile"));
     elementosConClase.forEach(function(elemento) {
-        elemento.classList.toggle("dark-modeTile");
+        elemento.classList.toggle("dark-Tile-border");
     });
 
+    var elementosConClase = Array.from(document.getElementsByClassName("tile-start"));
+    elementosConClase.forEach(function(elemento) {
+        elemento.classList.toggle("dark-modeTile-start");
+    });
+
+    var digitos = Array.from(document.getElementsByClassName("number"));
+    digitos.forEach(function(digito) {
+        digito.classList.toggle("dark-mode-border-number");
+    });
+
+    var tilesHorizontal= Array.from(document.getElementsByClassName("horizontal-line"));
+    tilesHorizontal.forEach(function(tile) {
+        tile.classList.toggle("dark-horizontal-line");
+    });
+
+
+    var tilesVertical= Array.from(document.getElementsByClassName("vertical-line"));
+    tilesVertical.forEach(function(tile) {
+        tile.classList.toggle("dark-vertical-line");
+    });
  }
  function checkNumberSelected(){
     var numbersSelected = document.getElementsByClassName("numberSelected");
