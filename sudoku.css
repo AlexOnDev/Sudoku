@@ -99,3 +99,19 @@ button{
 .dark-vertical-line{
     border-right: 1px solid white;
 }
+#corregir{
+    width: auto;
+}
+.rojo{
+    background-color: red;
+}
+@media screen and (max-width: 950px) {
+    #darkmode{
+        top: 80%;
+        left: 20%;
+    }
+    #corregir{
+        top: 80%;
+        left: 65%;
+    }
+}
