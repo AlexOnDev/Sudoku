@@ -70,7 +70,7 @@ hr{
     justify-content: center;
     align-items: center;
 }
-button{
+.buttonGenerales{
    position: absolute;
    left: 90%;
    padding: 10px;
@@ -102,9 +102,47 @@ button{
 #corregir{
     width: auto;
 }
-.rojo{
-    background-color: red;
+#menu button{
+    width: 100px;
+    height: 80px;
+    border: 1px solid black;
 }
+#eliminar{
+    width: 100px;
+    height: 80px;
+    border: 1px solid black;
+}
+
+.rojo{ background-color: red;}
+.azul { background-color: blue; }
+.verde { background-color: green; }
+.amarillo { background-color: yellow; }
+.naranja { background-color: orange; }
+.blanco { background-color: white; }
+
+
+#container {
+    display: flex;
+}
+
+#left {
+    flex: 1;
+}
+
+#center {
+    flex: 3;
+    padding: 0 20px;
+}
+
+#right {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
+
+
 @media screen and (max-width: 950px) {
     #darkmode{
         top: 80%;

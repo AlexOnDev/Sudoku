@@ -1,5 +1,7 @@
 var numSelected = null;
 var tileSelected = null;
+var colorSelected = "blanco";
+var eliminarSelected = false;
 var errors= 0;
 var board = [
     "--74916-5",
@@ -62,12 +64,20 @@ function setGame(){
             document.getElementById("board").append(tile);
         }
     }
+    //------------------------------------------------
     let buttonDm=document.getElementById("darkmode");
     buttonDm.addEventListener("click", darkMode);
 
     let buttonCorregir=document.getElementById("corregir");
     buttonCorregir.addEventListener("click", corregirBoard);
 
+    let botonesColores=document.querySelectorAll("#menu button");
+    botonesColores.forEach(function(boton){
+        boton.addEventListener("click", selectColor);
+    })
+
+    let botonEliminar= document.getElementById("eliminar");
+    botonEliminar.addEventListener("click",selectEliminar);
 
 }
 function selectNumber(){
@@ -84,6 +94,36 @@ function selectNumber(){
     }
     
 }
+
+function selectColor(){
+    colorSelected=this;
+    /*if(colorSelected==this){
+        colorSelected.classList.toggle("numberSelected");
+    }
+    else {
+        if(colorSelected!=null) 
+        colorSelected.classList.remove("numberSelected");
+           
+        
+        colorSelected=this;
+        colorSelected.classList.add("numberSelected");
+    }*/
+    
+}
+function selectEliminar(){
+
+    //numSelected=false;
+
+    if(eliminarSelected){
+        eliminarSelected=false;
+        this.classList.remove("rojo");
+    }
+    else{
+        eliminarSelected=true;
+        this.classList.add("rojo");
+    }
+
+}
 function selectTile(){
     if(checkNumberSelected()){
         //Resetea el color rojo puesto por fallar al corregir
@@ -95,6 +135,15 @@ function selectTile(){
         this.innerText = numSelected.id;
 
     }
+    if(colorSelected!=null && eliminarSelected==false){
+        checkColorTile(this);
+        if(colorSelected.className != "blanco" && !this.classList.contains("tile-start"))
+        this.classList.add(colorSelected.className);
+
+    }
+
+    if(eliminarSelected)
+    this.textContent="";
     /*
     if(checkNumberSelected()){
         if(this.innerText != "") //NO SOBRESCRIBIR
@@ -129,7 +178,8 @@ function darkMode() {
     });
 
     var digitos = Array.from(document.getElementsByClassName("number"));
-    digitos.forEach(function(digito) {
+    digitos.forEach(function(digito) {    const colorPicker = document.getElementById('colorPicker');
+
         digito.classList.toggle("dark-mode-border-number");
     });
 
@@ -148,6 +198,27 @@ function checkNumberSelected(){
     var numbersSelected = document.getElementsByClassName("numberSelected");
     if(numbersSelected.length >0) return true;
     return false;
+}
+function checkColorTile(tile){
+    let casilla = tile;
+    if(casilla.classList.contains("naranja"))
+    casilla.classList.remove("naranja");
+
+    if(casilla.classList.contains("azul"))
+    casilla.classList.remove("azul");
+
+    if(casilla.classList.contains("verde"))
+    casilla.classList.remove("verde");
+
+    if(casilla.classList.contains("amarillo"))
+    casilla.classList.remove("amarillo");
+
+    if(casilla.classList.contains("rojo"))
+    casilla.classList.remove("rojo");
+
+
+    /*if(casilla.classList.contains("blanco"))
+    casilla.classList.remove("blanco");*/
 }
 function corregirBoard(){
     
@@ -222,6 +293,7 @@ function resaltarDiferencias(diferencias) {
         
         // Si el div existe, establecer el fondo rojo
         if (div) {
+            checkColorTile(div);
             div.classList.add("rojo");
             //div.style.backgroundColor = "red";
         }
