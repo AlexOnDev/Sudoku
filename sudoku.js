@@ -14,7 +14,7 @@ var board = [
 ]
 
 var solution = [
-    "3874916-5",
+    "387491625",
     "241568379",
     "569327418",
     "758619234",
@@ -24,7 +24,6 @@ var solution = [
     "675832941",
     "812945763"
 ]
-
 window.onload=function(){
     setGame();
 }
@@ -64,8 +63,11 @@ function setGame(){
         }
     }
     let buttonDm=document.getElementById("darkmode");
-
     buttonDm.addEventListener("click", darkMode);
+
+    let buttonCorregir=document.getElementById("corregir");
+    buttonCorregir.addEventListener("click", corregirBoard);
+
 
 }
 function selectNumber(){
@@ -84,6 +86,17 @@ function selectNumber(){
 }
 function selectTile(){
     if(checkNumberSelected()){
+        //Resetea el color rojo puesto por fallar al corregir
+        if(this.classList.contains("rojo") && this.innerText != numSelected.id)
+            this.classList.remove("rojo");
+        
+        //Evita escribir sobre casillas por defectas
+        if(!this.classList.contains("tile-start"))
+        this.innerText = numSelected.id;
+
+    }
+    /*
+    if(checkNumberSelected()){
         if(this.innerText != "") //NO SOBRESCRIBIR
         return;
 
@@ -99,7 +112,7 @@ function selectTile(){
             errors ++;
             document.getElementById("errors").innerText= errors;
         }
-    }
+    }*/
 }
 function darkMode() {
     document.body.classList.toggle("dark-mode");
@@ -130,9 +143,88 @@ function darkMode() {
     tilesVertical.forEach(function(tile) {
         tile.classList.toggle("dark-vertical-line");
     });
- }
- function checkNumberSelected(){
+}
+function checkNumberSelected(){
     var numbersSelected = document.getElementsByClassName("numberSelected");
     if(numbersSelected.length >0) return true;
     return false;
- }
+}
+function corregirBoard(){
+    
+    let boardCompletado = true;  
+
+    var tiles = Array.from(document.getElementsByClassName("tile"));
+    var valores = [];
+    var filaValores = "";
+
+    for (var i = 0; i < tiles.length; i++) {
+        // Obtener el textContent de cada div
+        var valor = tiles[i].textContent;
+
+        if(valor == ""){
+            valor="-";
+            boardCompletado = false;
+        }
+
+        // Agregar el valor a la fila actual
+        filaValores+=valor;
+        
+        // Si hemos acumulado 9 valores, guardar la fila en el array de valores y resetear la fila
+        if (filaValores.length === 9) {
+            valores.push(filaValores);
+            filaValores = "";
+        }
+    }
+
+    // Verificar que tengamos los valores correctos
+    //console.log(valores);
+    
+    //Comparamos los arrays y resaltamos si hay diferencias.
+        let arrayDiferencias = compararArrays(valores, solution);
+        if(arrayDiferencias.length > 0){
+            resaltarDiferencias(arrayDiferencias);
+        }else if (boardCompletado == true){
+            console.log("Has ganado OOOOO");
+        }
+        //console.log(arrayDiferencias);
+    
+}
+
+function compararArrays(array1, array2) {
+    var diferencias = [];
+
+    // Recorrer ambos arrays
+    for (var i = 0; i < array1.length; i++) {
+        var fila1 = array1[i];
+        var fila2 = array2[i];
+
+        // Comparar los elementos de cada fila
+        for (var j = 0; j < fila1.length; j++) {
+            if ( fila1[j] !== "-"  && fila1[j] !== fila2[j]) {
+                // Si los elementos son diferentes, añadir la posición a las diferencias
+                diferencias.push({ fila: i, columna: j });
+            }
+        }
+    }
+
+    return diferencias;
+}
+
+
+function resaltarDiferencias(diferencias) {
+    // Recorrer el array de diferencias
+    diferencias.forEach(function(diferencia) {
+        // Construir el ID del div correspondiente
+        var divId = diferencia.fila + "-" + diferencia.columna;
+        
+        // Obtener el div con el ID correspondiente
+        var div = document.getElementById(divId);
+        
+        // Si el div existe, establecer el fondo rojo
+        if (div) {
+            div.classList.add("rojo");
+            //div.style.backgroundColor = "red";
+        }
+    });
+}
+ 
