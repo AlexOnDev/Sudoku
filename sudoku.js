@@ -195,6 +195,14 @@ function darkMode() {
     tilesVertical.forEach(function(tile) {
         tile.classList.toggle("dark-vertical-line");
     });
+
+    var botones=Array.from(document.getElementsByTagName("button"));
+    botones.forEach(function(boton){
+        if(boton.classList.contains("buttonGenerales")){
+            boton.classList.toggle("dark-mode-buttonGeneral");
+        }else
+        boton.classList.toggle("dark-mode-button");
+    });
 }
 function checkNumberSelected(){
     var numbersSelected = document.getElementsByClassName("numberSelected");
@@ -306,14 +314,14 @@ function resaltarDiferencias(diferencias) {
         }
     });
 }
-function resetClaseBotonesColores(){
-    document.getElementById("botonAzul").classList.toggle("azul")
-    document.getElementById("botonAmarillo").classList.toggle("amarillo");
-    document.getElementById("botonVerde").classList.toggle("verde");
-    document.getElementById("botonBlanco").classList.toggle("blanco");
-    document.getElementById("botonNaranja").classList.toggle("naranja");
+// function resetClaseBotonesColores(){
+//     document.getElementById("botonAzul").classList.toggle("azul")
+//     document.getElementById("botonAmarillo").classList.toggle("amarillo");
+//     document.getElementById("botonVerde").classList.toggle("verde");
+//     document.getElementById("botonBlanco").classList.toggle("blanco");
+//     document.getElementById("botonNaranja").classList.toggle("naranja");
    
-}
+// }
 function aumentarErrores(errores){
     errors+=errores;
     if(errors>=999) errors = 999;

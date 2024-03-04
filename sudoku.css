@@ -5,6 +5,9 @@ body{
 hr{
     width: 630px;
 }
+button{
+    border: 1px solid black;
+}
 #errors{
     color:coral;
 }
@@ -77,6 +80,7 @@ hr{
    background-color: coral;
    border-radius: 10px;
 }
+
 .dark-mode{
     background-color: rgb(24, 23, 23);
     color: white;
@@ -97,15 +101,22 @@ hr{
 .dark-vertical-line{
     border-right: 1px solid white;
 }
+.dark-mode-button{
+    border: 1px solid white;
+}
+.dark-mode-buttonGeneral{
+    border: 2px solid white;
+
+}
 #menu button{
     width: 140px;
     height: 100px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 #eliminar{
     width: 140px;
     height: 80px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
 }
 
 .rojo{ background-color: red;}
@@ -143,6 +154,15 @@ hr{
         filter: brightness(0.65); /* Reducir el brillo al 80% */
     
 }
+button:hover{
+    filter: brightness(0.9);
+ }
+.colorSelected:hover{
+    filter: brightness(0.65); 
+}
+
+
+
 @media screen and (max-width: 958px) {
     #container {
         flex-direction: column; /* Cambia la dirección de la flexbox a columna */
