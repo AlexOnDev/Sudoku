@@ -1,6 +1,6 @@
 var numSelected = null;
 var tileSelected = null;
-var colorSelected = "blanco";
+var colorSelected = null;
 var eliminarSelected = false;
 var errors= 0;
 var board = [
@@ -96,18 +96,20 @@ function selectNumber(){
 }
 
 function selectColor(){
-    colorSelected=this;
-    /*if(colorSelected==this){
-        colorSelected.classList.toggle("numberSelected");
+    //resetClaseBotonesColores();
+    //colorSelected=this;
+
+    if(colorSelected==this){
+        colorSelected.classList.toggle("colorSelected");
     }
     else {
         if(colorSelected!=null) 
-        colorSelected.classList.remove("numberSelected");
+        colorSelected.classList.remove("colorSelected");
            
         
         colorSelected=this;
-        colorSelected.classList.add("numberSelected");
-    }*/
+        colorSelected.classList.add("colorSelected");
+    }
     
 }
 function selectEliminar(){
@@ -116,7 +118,7 @@ function selectEliminar(){
 
     if(eliminarSelected){
         eliminarSelected=false;
-        this.classList.remove("rojo");
+        this.classList.remove("rojo"); //Colorea boton rojo eliminar
     }
     else{
         eliminarSelected=true;
@@ -130,15 +132,15 @@ function selectTile(){
         if(this.classList.contains("rojo") && this.innerText != numSelected.id)
             this.classList.remove("rojo");
         
-        //Evita escribir sobre casillas por defectas
+        //Evita escribir sobre casillas por defecto
         if(!this.classList.contains("tile-start"))
         this.innerText = numSelected.id;
 
     }
-    if(colorSelected!=null && eliminarSelected==false){
+    if(checkColorSelected() && eliminarSelected==false){
         checkColorTile(this);
-        if(colorSelected.className != "blanco" && !this.classList.contains("tile-start"))
-        this.classList.add(colorSelected.className);
+        if(colorSelected.classList[0] != "blanco" && !this.classList.contains("tile-start"))
+        this.classList.add(colorSelected.classList[0]);
 
     }
 
@@ -199,6 +201,13 @@ function checkNumberSelected(){
     if(numbersSelected.length >0) return true;
     return false;
 }
+
+function checkColorSelected(){
+    var colorsSelected = document.getElementsByClassName("colorSelected");
+    if(colorsSelected.length >0) return true;
+    return false;
+}
+
 function checkColorTile(tile){
     let casilla = tile;
     if(casilla.classList.contains("naranja"))
@@ -254,13 +263,14 @@ function corregirBoard(){
         let arrayDiferencias = compararArrays(valores, solution);
         if(arrayDiferencias.length > 0){
             resaltarDiferencias(arrayDiferencias);
+            aumentarErrores(arrayDiferencias.length);
+
         }else if (boardCompletado == true){
             console.log("Has ganado OOOOO");
         }
         //console.log(arrayDiferencias);
     
 }
-
 function compararArrays(array1, array2) {
     var diferencias = [];
 
@@ -280,8 +290,6 @@ function compararArrays(array1, array2) {
 
     return diferencias;
 }
-
-
 function resaltarDiferencias(diferencias) {
     // Recorrer el array de diferencias
     diferencias.forEach(function(diferencia) {
@@ -295,8 +303,19 @@ function resaltarDiferencias(diferencias) {
         if (div) {
             checkColorTile(div);
             div.classList.add("rojo");
-            //div.style.backgroundColor = "red";
         }
     });
 }
- 
+function resetClaseBotonesColores(){
+    document.getElementById("botonAzul").classList.toggle("azul")
+    document.getElementById("botonAmarillo").classList.toggle("amarillo");
+    document.getElementById("botonVerde").classList.toggle("verde");
+    document.getElementById("botonBlanco").classList.toggle("blanco");
+    document.getElementById("botonNaranja").classList.toggle("naranja");
+   
+}
+function aumentarErrores(errores){
+    errors+=errores;
+    if(errors>=999) errors = 999;
+        document.getElementById("errors").innerText= errors;
+}
