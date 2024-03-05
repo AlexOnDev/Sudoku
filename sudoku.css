@@ -76,9 +76,7 @@ button{
    padding: 10px;
    height: 60px;
    width: 120px;
-   border: 2px solid black;
    background-color: coral;
-   border-radius: 10px;
 }
 
 .dark-mode{
@@ -102,20 +100,22 @@ button{
     border-right: 1px solid white;
 }
 .dark-mode-button{
-    border: 1px solid white;
+    border: 2px solid white;
 }
 .dark-mode-buttonGeneral{
     border: 2px solid white;
-
 }
+
 #menu button{
     width: 140px;
     height: 100px;
+    margin-bottom: 5px;
     /* border: 1px solid black; */
 }
 #eliminar{
     width: 140px;
     height: 80px;
+    background-color: coral;
     /* border: 2px solid black; */
 }
 
@@ -161,7 +161,17 @@ button:hover{
     filter: brightness(0.65); 
 }
 
+#botonDosNumeros{
+    width: 140px;
+    height: 80px;
+    font-size: large;
+    background-color: coral;
+}
+button{
+    border: 2px solid black;
+    border-radius: 10px;
 
+}
 
 @media screen and (max-width: 958px) {
     #container {
